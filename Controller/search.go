@@ -53,6 +53,7 @@ func SearchDocument(w http.ResponseWriter, r *http.Request) {
 	})
 	response := make([]Models.ResponseDocument,0)
 	for i:=0;i<20;i++{
+		logrus.Info("Rank ",i," Document Score - ",scores[i].Score)
 		response = append(response,Models.ResponseDocuments[scores[i].DocumentIndex])
 	}
 	err := json.NewEncoder(w).Encode(response)

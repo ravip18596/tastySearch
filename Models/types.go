@@ -8,14 +8,14 @@ import (
 const(
 	Port = "8081"
 	ThresholdDocument = 100000
-	DText = "review/text:.*"
-	DSummary = "review/summary:.*"
+	DText = "review/text: .*"
+	DSummary = "review/summary: .*"
 	DScore   = "review/score: .*"
-	DProductID = "product/productId:.*"
-	DUserID = "review/userId:.*"
-	DProfileName = "review/profileName:.*"
-	DHelpfulness = "review/helpfulness:.*"
-	DReviewTime  = "review/time:.*"
+	DProductID = "product/productId: .*"
+	DUserID = "review/userId: .*"
+	DProfileName = "review/profileName: .*"
+	DHelpfulness = "review/helpfulness: .*"
+	DReviewTime  = "review/time: .*"
 )
 
 var (

@@ -81,7 +81,8 @@ func init(){
 	text := Models.DTextRegex.FindAll(fileByte,-1)
 	summary := Models.DSummaryRegex.FindAll(fileByte,-1)
 
-	log.Info("Length of text -",len(text)," summary - ",len(summary))
+	log.Debug("Number of Documents parsed -",len(text))
+	log.Debug("Now building Trie for ",Models.ThresholdDocument, " documents")
 	for i:=0;i<len(text) && i<Models.ThresholdDocument;i++{
 		textStr := string(text[i])
 		summaryStr := string(summary[i])
@@ -91,6 +92,16 @@ func init(){
 		profileNameStr := string(profileName[i])
 		helpfulStr := string(helpful[i])
 		timeStr := string(time[i])
+
+		textStr = strings.Replace(textStr,"review/text: ","",1)
+		summaryStr = strings.Replace(summaryStr,"review/summary: ","",1)
+		reviewScoreStr = strings.Replace(reviewScoreStr,"review/score: ","",1)
+		productIdStr = strings.Replace(productIdStr,"product/productId: ","",1)
+		userIDStr = strings.Replace(userIDStr,"review/userId: ","",1)
+		profileNameStr = strings.Replace(profileNameStr,"review/profileName: ","",1)
+		helpfulStr = strings.Replace(helpfulStr,"review/helpfulness: ","",1)
+		timeStr = strings.Replace(timeStr,"review/time: ","",1)
+
 		Models.ResponseDocuments = append(Models.ResponseDocuments,Models.ResponseDocument{
 			ProductID:   productIdStr,
 			UserID:      userIDStr,
@@ -101,9 +112,6 @@ func init(){
 			Text:        textStr,
 			Summary:     summaryStr,
 		})
-		textStr = strings.Replace(textStr,"review/text: ","",1)
-		summaryStr = strings.Replace(summaryStr,"review/summary: ","",1)
-		reviewScoreStr = strings.Replace(reviewScoreStr,"review/score: ","",1)
 
 		rs,_ := strconv.ParseFloat(reviewScoreStr,64)
 
