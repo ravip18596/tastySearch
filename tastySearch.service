@@ -1,0 +1,14 @@
+[Unit]
+Description=Tasty Search
+
+[Service]
+ExecStart=/home/ravi/go/bin/tastySearch > /home/ravi/go/logs/tastySearch.log 2>&1
+Restart=always
+RestartSec=10
+WorkingDirectory=/home/ravi/go
+ENVIRONMENT=FILE="/home/ravi/go/src/tastySearch/food.txt"
+User=ravi
+Group=ravi
+
+[Install]
+WantedBy=multi-user.target
